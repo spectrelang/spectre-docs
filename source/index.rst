@@ -63,8 +63,6 @@ For example:
 
 Further information on the language's spec can be found in the links below.
 
-Spectre documentation
-=====================
 
 .. toctree::
    :maxdepth: 2
