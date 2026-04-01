@@ -6,22 +6,30 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'spectre'
-copyright = '2026, Navid Momtahen'
-author = 'Navid Momtahen'
+import os
+import sys
+
+sys.path.insert(0, os.path.abspath("."))
+project = "Spectre"
+copyright = "2026, Navid Momtahen"
+author = "Navid Momtahen"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = []
 
-templates_path = ['_templates']
+templates_path = ["_templates"]
 exclude_patterns = []
-
 
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'alabaster'
-html_static_path = ['_static']
+html_theme = "alabaster"
+html_static_path = ["_static"]
+
+from sphinx.highlighting import lexers
+from spectre_lexer import SpectreLexer
+
+lexers["spectre"] = SpectreLexer()
