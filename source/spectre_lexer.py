@@ -14,7 +14,7 @@ class SpectreLexer(RegexLexer):
             # comments
             (r"//.*?$", Comment.Single),
             (r"/\*", Comment.Multiline, "comment"),
-            # keywords
+            (r"[{}()\[\],.;:!]", Punctuation),  # keywords
             (r"\b(pub|for|fn|val|use|return|if|else|pre|post|type)\b", Keyword),
             # types (basic heuristic)
             (r"\b(i32|i64|f32|f64|bool|void|usize)\b", Keyword.Type),
