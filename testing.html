@@ -1,0 +1,762 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Error Handling" href="error-handling.html"><link rel="prev" title="Modules and Packages" href="modules-and-packages.html">
+
+    <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
+        <title>Testing - Spectre documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">Spectre  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <span class="sidebar-brand-text">Spectre  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="core-concepts.html">Core Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="syntax-guide.html">Syntax Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contract-system.html">Contract System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-system.html">Type System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules-and-packages.html">Modules and Packages</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error-handling.html">Error Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="language-reference.html">Language Reference</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/testing.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="testing">
+<h1>Testing<a class="headerlink" href="#testing" title="Link to this heading">¶</a></h1>
+<p>Spectre provides built-in support for unit testing through test blocks and assertions. This document covers the testing framework and best practices for writing tests.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>Testing in Spectre is designed to verify that functions behave correctly according to their contracts. The testing framework includes:</p>
+<ul class="simple">
+<li><p><strong>Test blocks</strong>: Dedicated blocks for organizing tests</p></li>
+<li><p><strong>Assertions</strong>: Statements that verify expected behavior</p></li>
+<li><p><strong>Integration with contracts</strong>: Tests can verify contract satisfaction</p></li>
+</ul>
+</section>
+<section id="test-blocks">
+<h2>Test Blocks<a class="headerlink" href="#test-blocks" title="Link to this heading">¶</a></h2>
+<p>Test blocks are defined using the <code class="docutils literal notranslate"><span class="pre">test</span></code> keyword. They contain assertions that verify function behavior.</p>
+<section id="basic-syntax">
+<h3>Basic Syntax<a class="headerlink" href="#basic-syntax" title="Link to this heading">¶</a></h3>
+<div class="highlight-spectre notranslate"><div class="highlight"><pre><span></span><span class="n">test</span> <span class="p">{</span>
+    <span class="n">assert</span> <span class="n">condition</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="test-block-location">
+<h3>Test Block Location<a class="headerlink" href="#test-block-location" title="Link to this heading">¶</a></h3>
+<p>Test blocks are typically placed after function definitions:</p>
+<div class="highlight-spectre notranslate"><div class="highlight"><pre><span></span><span class="k">pub</span> <span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="kt">i32</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="kt">i32</span><span class="p">)</span> <span class="kt">i32</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="p">}</span>
+
+<span class="n">test</span> <span class="p">{</span>
+    <span class="n">assert</span> <span class="nf">add</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span> <span class="o">==</span> <span class="m">3</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="multiple-assertions">
+<h3>Multiple Assertions<a class="headerlink" href="#multiple-assertions" title="Link to this heading">¶</a></h3>
+<p>Test blocks can contain multiple assertions:</p>
+<div class="highlight-spectre notranslate"><div class="highlight"><pre><span></span><span class="k">pub</span> <span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="kt">i32</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="kt">i32</span><span class="p">)</span> <span class="kt">i32</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="p">}</span>
+
+<span class="n">test</span> <span class="p">{</span>
+    <span class="n">assert</span> <span class="nf">add</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span> <span class="o">==</span> <span class="m">3</span>
+    <span class="n">assert</span> <span class="nf">add</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span> <span class="o">==</span> <span class="m">0</span>
+    <span class="n">assert</span> <span class="nf">add</span><span class="p">(</span><span class="o">-</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="o">==</span> <span class="m">0</span>
+    <span class="n">assert</span> <span class="nf">add</span><span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="m">200</span><span class="p">)</span> <span class="o">==</span> <span class="m">300</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="assertions">
+<h2>Assertions<a class="headerlink" href="#assertions" title="Link to this heading">¶</a></h2>
+<p>Assertions verify that a condition is true. If an assertion fails, the test fails.</p>
+<section id="basic-assertions">
+<h3>Basic Assertions<a class="headerlink" href="#basic-assertions" title="Link to this heading">¶</a></h3>
+<div class="highlight-spectre notranslate"><div class="highlight"><pre><span></span><span class="n">assert</span> <span class="n">expression</span> <span class="o">==</span> <span class="n">expected_value</span>
+</pre></div>
+</div>
+</section>
+<section id="assertion-examples">
+<h3>Assertion Examples<a class="headerlink" href="#assertion-examples" title="Link to this heading">¶</a></h3>
+<div class="highlight-spectre notranslate"><div class="highlight"><pre><span></span><span class="c1">// Equality assertions</span>
+<span class="n">assert</span> <span class="nf">add</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span> <span class="o">==</span> <span class="m">3</span>
+<span class="n">assert</span> <span class="n">result</span> <span class="o">==</span> <span class="m">0</span>
+<span class="n">assert</span> <span class="n">value</span> <span class="o">==</span> <span class="m">100</span>
+
+<span class="c1">// Comparison assertions</span>
+<span class="n">assert</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="m">0</span>
+<span class="n">assert</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="m">10</span>
+<span class="n">assert</span> <span class="n">z</span> <span class="p">!</span><span class="o">=</span> <span class="m">5</span>
+
+<span class="c1">// Boolean assertions</span>
+<span class="n">assert</span> <span class="n">is_valid</span>
+<span class="n">assert</span> <span class="n">has_completed</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="testing-functions-with-contracts">
+<h2>Testing Functions with Contracts<a class="headerlink" href="#testing-functions-with-contracts" title="Link to this heading">¶</a></h2>
+<p>Tests can verify that functions satisfy their contracts.</p>
+<section id="testing-pre-conditions">
+<h3>Testing Pre-conditions<a class="headerlink" href="#testing-pre-conditions" title="Link to this heading">¶</a></h3>
+<div class="highlight-spectre notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">divide</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="kt">i32</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="kt">i32</span><span class="p">)</span> <span class="kt">i32</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="k">pre</span> <span class="p">{</span>
+        <span class="n">not_zero</span> <span class="p">:</span> <span class="n">b</span> <span class="p">!</span><span class="o">=</span> <span class="m">0</span>
+    <span class="p">}</span>
+    <span class="k">val</span> <span class="n">result</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+    <span class="k">return</span> <span class="n">result</span>
+<span class="p">}</span>
+
+<span class="n">test</span> <span class="p">{</span>
+    <span class="n">assert</span> <span class="nf">divide</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span> <span class="o">==</span> <span class="m">5</span>
+    <span class="n">assert</span> <span class="nf">divide</span><span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="m">10</span><span class="p">)</span> <span class="o">==</span> <span class="m">10</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="testing-post-conditions">
+<h3>Testing Post-conditions<a class="headerlink" href="#testing-post-conditions" title="Link to this heading">¶</a></h3>
+<div class="highlight-spectre notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">double</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="kt">i32</span><span class="p">)</span> <span class="kt">i32</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="k">pre</span> <span class="p">{</span>
+        <span class="n">x</span> <span class="o">&gt;</span> <span class="m">0</span>
+    <span class="p">}</span>
+    <span class="k">val</span> <span class="n">result</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="m">2</span>
+    <span class="k">post</span> <span class="p">{</span>
+        <span class="n">result_is_double</span> <span class="p">:</span> <span class="n">result</span> <span class="o">==</span> <span class="n">x</span> <span class="o">*</span> <span class="m">2</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">result</span>
+<span class="p">}</span>
+
+<span class="n">test</span> <span class="p">{</span>
+    <span class="n">assert</span> <span class="nf">double</span><span class="p">(</span><span class="m">5</span><span class="p">)</span> <span class="o">==</span> <span class="m">10</span>
+    <span class="n">assert</span> <span class="nf">double</span><span class="p">(</span><span class="m">10</span><span class="p">)</span> <span class="o">==</span> <span class="m">20</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="testing-option-types">
+<h2>Testing Option Types<a class="headerlink" href="#testing-option-types" title="Link to this heading">¶</a></h2>
+<p>Functions that return option types can be tested for both <code class="docutils literal notranslate"><span class="pre">some</span></code> and <code class="docutils literal notranslate"><span class="pre">none</span></code> cases.</p>
+<section id="testing-some-values">
+<h3>Testing Some Values<a class="headerlink" href="#testing-some-values" title="Link to this heading">¶</a></h3>
+<div class="highlight-spectre notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">check</span><span class="p">(</span><span class="n">fail</span><span class="p">:</span> <span class="kt">bool</span><span class="p">)</span> <span class="n">option</span><span class="p">[</span><span class="kt">i32</span><span class="p">]!</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">fail</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">some</span> <span class="m">10</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">none</span>
+<span class="p">}</span>
+
+<span class="n">test</span> <span class="p">{</span>
+    <span class="c1">// Test some case</span>
+    <span class="n">assert</span> <span class="nf">check</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="o">==</span> <span class="n">some</span> <span class="m">10</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="testing-none-values">
+<h3>Testing None Values<a class="headerlink" href="#testing-none-values" title="Link to this heading">¶</a></h3>
+<div class="highlight-spectre notranslate"><div class="highlight"><pre><span></span><span class="n">test</span> <span class="p">{</span>
+    <span class="c1">// Test none case</span>
+    <span class="n">assert</span> <span class="nf">check</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span> <span class="o">==</span> <span class="n">none</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="testing-trusted-functions">
+<h2>Testing Trusted Functions<a class="headerlink" href="#testing-trusted-functions" title="Link to this heading">¶</a></h2>
+<p>Functions marked with the trust marker (<code class="docutils literal notranslate"><span class="pre">!</span></code>) can be tested like regular functions.</p>
+<div class="highlight-spectre notranslate"><div class="highlight"><pre><span></span><span class="k">pub</span> <span class="k">fn</span> <span class="nf">some_other_function</span><span class="p">()</span> <span class="kt">void</span><span class="p">!</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">std</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="s">&quot;This function has no contracts&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">test</span> <span class="p">{</span>
+    <span class="c1">// Test that the function completes without error</span>
+    <span class="nf">some_other_function</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="testing-structs">
+<h2>Testing Structs<a class="headerlink" href="#testing-structs" title="Link to this heading">¶</a></h2>
+<p>Structs can be tested by verifying field values and mutability.</p>
+<section id="testing-struct-creation">
+<h3>Testing Struct Creation<a class="headerlink" href="#testing-struct-creation" title="Link to this heading">¶</a></h3>
+<div class="highlight-spectre notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">SomeType</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">x</span><span class="p">:</span> <span class="kt">i32</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">mut</span> <span class="kt">i32</span>
+<span class="p">}</span>
+
+<span class="n">test</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="n">st</span><span class="p">:</span> <span class="n">SomeType</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="m">30</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="m">40</span><span class="p">}</span>
+    <span class="c1">// Verify field values</span>
+    <span class="c1">// Note: Direct field access syntax may vary by implementation</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="testing-mutable-structs">
+<h3>Testing Mutable Structs<a class="headerlink" href="#testing-mutable-structs" title="Link to this heading">¶</a></h3>
+<div class="highlight-spectre notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">Point</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">mut</span> <span class="kt">i32</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">mut</span> <span class="kt">i32</span>
+<span class="p">}</span>
+
+<span class="n">test</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="n">p</span><span class="p">:</span> <span class="n">mut</span> <span class="n">Point</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="m">1</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="m">2</span><span class="p">}</span>
+    <span class="n">p</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="m">10</span>
+    <span class="n">p</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="m">20</span>
+    <span class="c1">// Verify mutations</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="complete-test-example">
+<h2>Complete Test Example<a class="headerlink" href="#complete-test-example" title="Link to this heading">¶</a></h2>
+<p>A complete example demonstrating various testing patterns:</p>
+<div class="highlight-spectre notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">std</span> <span class="o">=</span> <span class="k">use</span><span class="p">(</span><span class="s">&quot;std&quot;</span><span class="p">)</span>
+
+<span class="k">pub</span> <span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="kt">i32</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="kt">i32</span><span class="p">)</span> <span class="kt">i32</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="p">}</span>
+
+<span class="k">pub</span> <span class="k">fn</span> <span class="nf">subtract</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="kt">i32</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="kt">i32</span><span class="p">)</span> <span class="kt">i32</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">multiply</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="kt">i32</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="kt">i32</span><span class="p">)</span> <span class="kt">i32</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="k">pre</span> <span class="p">{</span>
+        <span class="n">x</span> <span class="o">&gt;</span> <span class="m">0</span> <span class="err">&amp;&amp;</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="m">0</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
+<span class="p">}</span>
+
+<span class="n">test</span> <span class="p">{</span>
+    <span class="c1">// Test public functions</span>
+    <span class="n">assert</span> <span class="nf">add</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span> <span class="o">==</span> <span class="m">3</span>
+    <span class="n">assert</span> <span class="nf">add</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span> <span class="o">==</span> <span class="m">0</span>
+    <span class="n">assert</span> <span class="nf">add</span><span class="p">(</span><span class="o">-</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="o">==</span> <span class="m">0</span>
+
+    <span class="c1">// Test subtraction</span>
+    <span class="n">assert</span> <span class="nf">subtract</span><span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span> <span class="o">==</span> <span class="m">2</span>
+    <span class="n">assert</span> <span class="nf">subtract</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="m">10</span><span class="p">)</span> <span class="o">==</span> <span class="m">0</span>
+
+    <span class="c1">// Test private function with contracts</span>
+    <span class="n">assert</span> <span class="nf">multiply</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span> <span class="o">==</span> <span class="m">6</span>
+    <span class="n">assert</span> <span class="nf">multiply</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="m">10</span><span class="p">)</span> <span class="o">==</span> <span class="m">100</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="test-organization">
+<h2>Test Organization<a class="headerlink" href="#test-organization" title="Link to this heading">¶</a></h2>
+<section id="grouping-related-tests">
+<h3>Grouping Related Tests<a class="headerlink" href="#grouping-related-tests" title="Link to this heading">¶</a></h3>
+<p>Tests for the same function can be grouped together:</p>
+<div class="highlight-spectre notranslate"><div class="highlight"><pre><span></span><span class="k">pub</span> <span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="kt">i32</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="kt">i32</span><span class="p">)</span> <span class="kt">i32</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="p">}</span>
+
+<span class="k">pub</span> <span class="k">fn</span> <span class="nf">subtract</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="kt">i32</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="kt">i32</span><span class="p">)</span> <span class="kt">i32</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span>
+<span class="p">}</span>
+
+<span class="n">test</span> <span class="p">{</span>
+    <span class="c1">// Addition tests</span>
+    <span class="n">assert</span> <span class="nf">add</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span> <span class="o">==</span> <span class="m">3</span>
+    <span class="n">assert</span> <span class="nf">add</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span> <span class="o">==</span> <span class="m">0</span>
+    <span class="n">assert</span> <span class="nf">add</span><span class="p">(</span><span class="o">-</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="o">==</span> <span class="m">0</span>
+    <span class="n">assert</span> <span class="nf">add</span><span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="m">200</span><span class="p">)</span> <span class="o">==</span> <span class="m">300</span>
+<span class="p">}</span>
+
+<span class="n">test</span> <span class="p">{</span>
+    <span class="c1">// Subtraction tests</span>
+    <span class="n">assert</span> <span class="nf">subtract</span><span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span> <span class="o">==</span> <span class="m">2</span>
+    <span class="n">assert</span> <span class="nf">subtract</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="m">10</span><span class="p">)</span> <span class="o">==</span> <span class="m">0</span>
+    <span class="n">assert</span> <span class="nf">subtract</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">5</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="m">5</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="test-files">
+<h3>Test Files<a class="headerlink" href="#test-files" title="Link to this heading">¶</a></h3>
+<p>Tests can be placed in the same file as the code they test, or in separate test files:</p>
+<p><strong>math.spr:</strong></p>
+<div class="highlight-spectre notranslate"><div class="highlight"><pre><span></span><span class="k">pub</span> <span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="kt">i32</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="kt">i32</span><span class="p">)</span> <span class="kt">i32</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="p">}</span>
+
+<span class="n">test</span> <span class="p">{</span>
+    <span class="n">assert</span> <span class="nf">add</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span> <span class="o">==</span> <span class="m">3</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">¶</a></h2>
+<section id="writing-effective-tests">
+<h3>Writing Effective Tests<a class="headerlink" href="#writing-effective-tests" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Test edge cases</strong>: Include tests for boundary conditions</p></li>
+<li><p><strong>Test both success and failure</strong>: For option types, test both <code class="docutils literal notranslate"><span class="pre">some</span></code> and <code class="docutils literal notranslate"><span class="pre">none</span></code></p></li>
+<li><p><strong>Use descriptive test organization</strong>: Group related assertions together</p></li>
+<li><p><strong>Test contract satisfaction</strong>: Verify that functions meet their contracts</p></li>
+</ol>
+</section>
+<section id="test-coverage">
+<h3>Test Coverage<a class="headerlink" href="#test-coverage" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Cover all public functions</strong>: Every public function should have tests</p></li>
+<li><p><strong>Test private functions</strong>: Private functions with contracts should be tested</p></li>
+<li><p><strong>Test error paths</strong>: Include tests for error conditions</p></li>
+</ol>
+</section>
+<section id="example-comprehensive-test-suite">
+<h3>Example: Comprehensive Test Suite<a class="headerlink" href="#example-comprehensive-test-suite" title="Link to this heading">¶</a></h3>
+<div class="highlight-spectre notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">std</span> <span class="o">=</span> <span class="k">use</span><span class="p">(</span><span class="s">&quot;std&quot;</span><span class="p">)</span>
+
+<span class="k">type</span> <span class="n">Point</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">mut</span> <span class="kt">i32</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">mut</span> <span class="kt">i32</span>
+<span class="p">}</span>
+
+<span class="k">pub</span> <span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="kt">i32</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="kt">i32</span><span class="p">)</span> <span class="kt">i32</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">multiply</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="kt">i32</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="kt">i32</span><span class="p">)</span> <span class="kt">i32</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="k">pre</span> <span class="p">{</span>
+        <span class="n">x</span> <span class="o">&gt;</span> <span class="m">0</span> <span class="err">&amp;&amp;</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="m">0</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">check</span><span class="p">(</span><span class="n">fail</span><span class="p">:</span> <span class="kt">bool</span><span class="p">)</span> <span class="n">option</span><span class="p">[</span><span class="kt">i32</span><span class="p">]!</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">fail</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">some</span> <span class="m">10</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">none</span>
+<span class="p">}</span>
+
+<span class="c1">// Test basic arithmetic</span>
+<span class="n">test</span> <span class="p">{</span>
+    <span class="n">assert</span> <span class="nf">add</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span> <span class="o">==</span> <span class="m">3</span>
+    <span class="n">assert</span> <span class="nf">add</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span> <span class="o">==</span> <span class="m">0</span>
+    <span class="n">assert</span> <span class="nf">add</span><span class="p">(</span><span class="o">-</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="o">==</span> <span class="m">0</span>
+    <span class="n">assert</span> <span class="nf">add</span><span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="m">200</span><span class="p">)</span> <span class="o">==</span> <span class="m">300</span>
+<span class="p">}</span>
+
+<span class="c1">// Test multiplication with contracts</span>
+<span class="n">test</span> <span class="p">{</span>
+    <span class="n">assert</span> <span class="nf">multiply</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span> <span class="o">==</span> <span class="m">6</span>
+    <span class="n">assert</span> <span class="nf">multiply</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="m">10</span><span class="p">)</span> <span class="o">==</span> <span class="m">100</span>
+    <span class="n">assert</span> <span class="nf">multiply</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="o">==</span> <span class="m">1</span>
+<span class="p">}</span>
+
+<span class="c1">// Test option types</span>
+<span class="n">test</span> <span class="p">{</span>
+    <span class="n">assert</span> <span class="nf">check</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="o">==</span> <span class="n">some</span> <span class="m">10</span>
+    <span class="n">assert</span> <span class="nf">check</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span> <span class="o">==</span> <span class="n">none</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="running-tests">
+<h2>Running Tests<a class="headerlink" href="#running-tests" title="Link to this heading">¶</a></h2>
+<p>The method for running tests depends on the Spectre toolchain. Typically, tests are run using a command such as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">spectre</span> <span class="n">test</span> <span class="o">&lt;</span><span class="n">file</span><span class="o">.</span><span class="n">spr</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Or for a full project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">spectre</span> <span class="n">test</span>
+</pre></div>
+</div>
+</section>
+<section id="test-output">
+<h2>Test Output<a class="headerlink" href="#test-output" title="Link to this heading">¶</a></h2>
+<p>When tests pass, the test runner typically reports success. When tests fail, the output includes:</p>
+<ul class="simple">
+<li><p>The failing assertion</p></li>
+<li><p>The expected value</p></li>
+<li><p>The actual value</p></li>
+<li><p>The location of the failure</p></li>
+</ul>
+</section>
+<section id="integration-with-contracts">
+<h2>Integration with Contracts<a class="headerlink" href="#integration-with-contracts" title="Link to this heading">¶</a></h2>
+<p>Tests and contracts work together to ensure correctness:</p>
+<ol class="arabic simple">
+<li><p><strong>Contracts define behavior</strong>: Pre-conditions and post-conditions specify what functions do</p></li>
+<li><p><strong>Tests verify behavior</strong>: Tests confirm that functions behave as specified</p></li>
+<li><p><strong>Contracts catch runtime errors</strong>: Contract violations cause panics</p></li>
+<li><p><strong>Tests catch logic errors</strong>: Failed assertions indicate incorrect logic</p></li>
+</ol>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">¶</a></h2>
+<p>Spectre’s testing framework provides:</p>
+<ul class="simple">
+<li><p><strong>Test blocks</strong>: <code class="docutils literal notranslate"><span class="pre">test</span> <span class="pre">{</span> <span class="pre">assert</span> <span class="pre">condition</span> <span class="pre">}</span></code></p></li>
+<li><p><strong>Assertions</strong>: <code class="docutils literal notranslate"><span class="pre">assert</span> <span class="pre">expression</span></code></p></li>
+<li><p><strong>Contract testing</strong>: Verify contract satisfaction</p></li>
+<li><p><strong>Option type testing</strong>: Test <code class="docutils literal notranslate"><span class="pre">some</span></code> and <code class="docutils literal notranslate"><span class="pre">none</span></code> cases</p></li>
+<li><p><strong>Trusted function testing</strong>: Test functions with <code class="docutils literal notranslate"><span class="pre">!</span></code> marker</p></li>
+</ul>
+<p>Key points:</p>
+<ol class="arabic simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">test</span></code> blocks to organize tests</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">assert</span></code> to verify conditions</p></li>
+<li><p>Test all public functions</p></li>
+<li><p>Include edge cases and error conditions</p></li>
+<li><p>Verify contract satisfaction through tests</p></li>
+</ol>
+<p>For more information on error handling in tests, see the <a class="reference internal" href="error-handling.html"><span class="doc">Error Handling</span></a> documentation.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="error-handling.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Error Handling</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="modules-and-packages.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Modules and Packages</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Navid Momtahen
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Testing</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#test-blocks">Test Blocks</a><ul>
+<li><a class="reference internal" href="#basic-syntax">Basic Syntax</a></li>
+<li><a class="reference internal" href="#test-block-location">Test Block Location</a></li>
+<li><a class="reference internal" href="#multiple-assertions">Multiple Assertions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#assertions">Assertions</a><ul>
+<li><a class="reference internal" href="#basic-assertions">Basic Assertions</a></li>
+<li><a class="reference internal" href="#assertion-examples">Assertion Examples</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#testing-functions-with-contracts">Testing Functions with Contracts</a><ul>
+<li><a class="reference internal" href="#testing-pre-conditions">Testing Pre-conditions</a></li>
+<li><a class="reference internal" href="#testing-post-conditions">Testing Post-conditions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#testing-option-types">Testing Option Types</a><ul>
+<li><a class="reference internal" href="#testing-some-values">Testing Some Values</a></li>
+<li><a class="reference internal" href="#testing-none-values">Testing None Values</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#testing-trusted-functions">Testing Trusted Functions</a></li>
+<li><a class="reference internal" href="#testing-structs">Testing Structs</a><ul>
+<li><a class="reference internal" href="#testing-struct-creation">Testing Struct Creation</a></li>
+<li><a class="reference internal" href="#testing-mutable-structs">Testing Mutable Structs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#complete-test-example">Complete Test Example</a></li>
+<li><a class="reference internal" href="#test-organization">Test Organization</a><ul>
+<li><a class="reference internal" href="#grouping-related-tests">Grouping Related Tests</a></li>
+<li><a class="reference internal" href="#test-files">Test Files</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#best-practices">Best Practices</a><ul>
+<li><a class="reference internal" href="#writing-effective-tests">Writing Effective Tests</a></li>
+<li><a class="reference internal" href="#test-coverage">Test Coverage</a></li>
+<li><a class="reference internal" href="#example-comprehensive-test-suite">Example: Comprehensive Test Suite</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#running-tests">Running Tests</a></li>
+<li><a class="reference internal" href="#test-output">Test Output</a></li>
+<li><a class="reference internal" href="#integration-with-contracts">Integration with Contracts</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>
