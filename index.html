@@ -255,6 +255,7 @@
 <section id="what-this-guide-isn-t">
 <h1>What this guide isn’t<a class="headerlink" href="#what-this-guide-isn-t" title="Link to this heading">¶</a></h1>
 <p>This is not an idiomatic guide on how to write Spectre code, and given how niche the language is, there is unlikely to ever be a “standard” developed for it. Regardless, this aims to showcase the languages features and display how tasks can be achieved via the Spectre programming language.</p>
+<p>Note that the information in this guide may be out of date with the current Spectre API, as it is rapidly evolving.</p>
 </section>
 <hr class="docutils" />
 <section id="getting-started">
@@ -263,7 +264,7 @@
 <div class="highlight-spectre notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">std</span> <span class="o">=</span> <span class="k">use</span><span class="p">(</span><span class="s">&quot;std&quot;</span><span class="p">)</span>
 
 <span class="k">pub</span> <span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="kt">i32</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="n">trust</span> <span class="n">std</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="nf">put_any</span><span class="p">(</span><span class="s">&quot;Hello, world: {d}.&quot;</span><span class="p">,</span> <span class="p">{</span><span class="m">10</span><span class="p">})</span>
+    <span class="n">trust</span> <span class="n">std</span><span class="p">.</span><span class="n">stdio</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="s">&quot;Hello, world: {d}.&quot;</span><span class="p">,</span> <span class="p">{</span><span class="m">10</span><span class="p">})</span>
     <span class="k">return</span> <span class="m">0</span>
 <span class="p">}</span>
 </pre></div>

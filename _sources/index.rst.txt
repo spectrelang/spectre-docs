@@ -30,6 +30,8 @@ What this guide isn't
 
 This is not an idiomatic guide on how to write Spectre code, and given how niche the language is, there is unlikely to ever be a "standard" developed for it. Regardless, this aims to showcase the languages features and display how tasks can be achieved via the Spectre programming language.
 
+Note that the information in this guide may be out of date with the current Spectre API, as it is rapidly evolving.
+
 ----
 
 Getting started
@@ -42,7 +44,7 @@ The simple hello world can be achieved via the following:
     val std = use("std")
 
     pub fn main() i32 = {
-        trust std.io.put_any("Hello, world: {d}.", {10})
+        trust std.stdio.print("Hello, world: {d}.", {10})
         return 0
     }
 
