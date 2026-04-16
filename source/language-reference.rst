@@ -48,6 +48,8 @@ Reserved Keywords
 | none     | Option type variant without    |
 |          | value                          |
 +----------+--------------------------------+
+| invariant| Some invariant type conditions |
++----------+--------------------------------+
 
 Contextual Keywords
 ~~~~~~~~~~~~~~~~~~~
