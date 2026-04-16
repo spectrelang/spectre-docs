@@ -48,7 +48,7 @@ The simple hello world can be achieved via the following:
         return 0
     }
 
-You will notice the ``trust`` keyword here. Any operation (such as IO) that has an underlying unsafe mechanism (such as the printf builtin that std.io.put_any uses), must be explicitly trusted, as it is inherently impure.
+You will notice the ``trust`` keyword here. Any operation (such as IO) that has an underlying unsafe mechanism (such as the printf builtin that std.stdio.print uses), must be explicitly trusted, as it is inherently impure.
 
 This is of course unless you use the safe wrappers around those functions, that use preconds, invariants, etc..., or if you use simpler functions altogether. There is no need, for example, to "trust" a simple print, since, unless there's a severe OOM error, it won't fail. Thus, we mark it as safe in the standard library.
 
@@ -60,7 +60,7 @@ For example:
 
     pub fn some_function() void! = {
         val x: usize = some_unsafe_function()
-        std.io.put_any("Wow, now I can omit the trust keyword. {d}", {x})
+        std.stdio.print("Wow, now I can omit the trust keyword. {d}", {x})
     }
 
 Further information on the language's spec can be found in the links below.
