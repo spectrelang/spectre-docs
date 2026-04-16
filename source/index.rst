@@ -8,7 +8,7 @@ Spectre
 
 Spectre is a simple programming language meant for safe and contract based low-level systems programming.
 
-It allows for function-level invariants, preconditions and postconditions, and it enables safety through use of immutability by default.
+It allows for type-level invariants, and function-level preconditions and postconditions, it enables safety through use of immutability by default.
 
 This documentation aims to act as a user guide for the Spectre programming language.
 
