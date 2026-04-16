@@ -21,7 +21,7 @@ There is a notable lack of contract based programming languages that enforce cor
 
 The idea behind Spectre is that it enables correctness, sane data flow, and immutability by default, such that low level programming is safer, but not to the point of annoyance.
 
-Memory can be managed manually, or a garbage collector can be linked. Either way the language compiles from high-level code to the QBE target.
+Memory is managed manually, typically through the use of a standard library allocator (Arena, Stack) or a custom allocator. The language compiles from high-level code to the QBE target.
 
 ----
 
