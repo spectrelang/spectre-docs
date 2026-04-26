@@ -30,19 +30,10 @@ To create a mutable variable, the mutability must be specified at the type level
    val x: mut i32 = 10    // Mutable - can be reassigned
    x = 20                 // Valid
 
-Mutable Buffers
-~~~~~~~~~~~~~~~
-
-For mutable string or buffer types, the same principle applies:
-
-.. code-block:: spectre
-
-   val buf: mut []char = "data"    // Mutable buffer
-
 Struct Field Mutability
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Struct fields can be individually marked as mutable, but the containing struct instance must also be mutable to allow field modification:
+Struct fields can be individually marked as mutable, but the containing struct instance must also be mutable to allow field modification. This is to prevent accidental mutation of immutable-by-design fields:
 
 .. code-block:: spectre
 
@@ -81,6 +72,8 @@ Pre-conditions define the requirements that must be satisfied before a function 
        val result = a / b
        return result
    }
+
+Note that labels are entirely optional, however the runtime error associated with some pre or postcondition will only refer to the line number and filename, rather than the actual name of the assertion, thus for readability purposes it may be useful to label the pre and postconditions.
 
 Post-conditions
 ~~~~~~~~~~~~~~~
