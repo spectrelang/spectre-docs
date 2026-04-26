@@ -131,7 +131,26 @@ As aforementioned, unlabeled conditions are also valid:
 Runtime Behavior
 ~~~~~~~~~~~~~~~~
 
-Currently, contracts are lowered to runtime checks. If a condition fails, the program panics to prevent undefined behavior. Future versions aim to support static analysis to elide runtime checks where mathematical proof is possible.
+Currently, contracts are lowered to runtime checks. If a condition fails, the program panics to prevent undefined behavior. Type-level invariants are evaluated at compile time where possible, otherwise they are lowered to runtime checks.
+
+Type-level Invariants
+~~~~~~~~~~~~~~~~~~~~~
+
+Type-level invariants are defined through the use of the invariant clauses within type declarations.
+
+An example is as follows:
+
+.. code-block:: spectre
+   type SomeType = {
+        x: i32
+        y: i32
+
+        invariant {
+            x > 10 && y > 10
+        }
+   }
+
+If ``SomeType`` is instantiated at any point with its x or y values below 10, it will result in a compile time error, if they are ever mutated, and their values become lower than 10 as a result of that mutation (in the hypothetical situation in which x and y above were marked "mut"), this will result in a runtime assertion error stating that the invariant was violated.
 
 Trust Model
 -----------
@@ -158,6 +177,7 @@ Functions that do not contain formal contracts or perform unverifiable side effe
 
    // Trusted function - no contracts, performs I/O
    fn print_data() void! = {
+       @printf("{d}\n", {10})
        // Unverified operation
    }
 
