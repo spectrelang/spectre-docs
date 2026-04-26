@@ -31,7 +31,7 @@ Once imported, the standard library's functionality is accessible through the ``
    val std = use("std")
 
    pub fn main() void! = {
-       std.io.print("Hello, world.")
+       std.stdio.print("Hello, world.")
    }
 
 Importing Specific Files
@@ -174,8 +174,8 @@ The standard library provides I/O functionality through the ``io`` module:
    val std = use("std")
 
    pub fn main() void! = {
-       std.io.print("Hello, world.")
-       std.io.put_any("{d} {d}", {x, y})
+       std.stdio.print("Hello, world.")
+       std.stdio.print("{d} {d}", {x, y})
    }
 
 I/O Functions
@@ -189,10 +189,10 @@ Based on the sample code, the standard library provides:
 .. code-block:: spectre
 
    // Print a simple string
-   std.io.print("Hello, world.")
+   std.stdio.print("Hello, world.")
 
    // Print formatted output
-   std.io.put_any("{d} {d}", {x, y})
+   std.stdio.print("{d} {d}", {x, y})
 
 Cross-Module Calls
 ------------------
@@ -206,7 +206,7 @@ Functions from other modules can be called after importing:
 
    pub fn main() void! = {
        // Call standard library function
-       std.io.print("Starting...")
+       std.stdio.print("Starting...")
 
        // Call function from utils module
        utils.process_data()
@@ -228,7 +228,7 @@ Functions from imported modules that are marked as trusted must be handled appro
 
    // Trusted function from standard library
    pub fn main() void! = {
-       std.io.print("This is trusted")
+       std.stdio.print("This is trusted")
    }
 
 Using Trust with Module Calls
@@ -239,7 +239,7 @@ Using Trust with Module Calls
    val std = use("std")
 
    fn pure_function() void = {
-       trust std.io.print("This is trusted now")
+       trust std.stdio.print("This is trusted now")
    }
 
 Examples
@@ -258,7 +258,7 @@ Basic Module Structure
    }
 
    pub fn main() void! = {
-       std.io.print("Hello, world.")
+       std.stdio.print("Hello, world.")
    }
 
 Multi-Module Program
@@ -273,7 +273,7 @@ Multi-Module Program
 
    pub fn main() i32 = {
        val result = math.add(1, 2)
-       std.io.print("Result computed")
+       std.stdio.print("Result computed")
        return 0
    }
 
@@ -307,7 +307,7 @@ Module with Contracts
    }
 
    pub fn main() void = {
-       std.io.put_any("{d}", {trusted_function(1, 2)})
+       std.stdio.print("{d}", {trusted_function(1, 2)})
    }
 
 Best Practices

@@ -200,7 +200,7 @@ In the current implementation (v0.1.0), contracts are lowered to runtime checks.
 
    pub fn main() void = {
        // This will cause a runtime error because y = -2 violates the pre-condition
-       std.io.put_any("{d}", {trusted_function(1, -2)})
+       std.stdio.print("{d}", {trusted_function(1, -2)})
    }
 
 Future Static Analysis
@@ -233,7 +233,7 @@ Functions that do not contain formal contracts or perform unverifiable side effe
 
    // Trusted function - no contracts
    pub fn some_other_function() void! = {
-       std.io.print("This function has no preconds, postconds, or invariants")
+       std.stdio.print("This function has no preconds, postconds, or invariants")
    }
 
 When to Use the Trust Marker
@@ -255,7 +255,7 @@ Examples
 
    // I/O operation - must be marked as trusted
    pub fn main() void! = {
-       std.io.print("Hello, world.")
+       std.stdio.print("Hello, world.")
    }
 
    // Option return with side effects
@@ -268,7 +268,7 @@ Examples
 
    // Pure function that uses trusted operations
    fn pure_function() void = {
-       trust std.io.print("This is trusted now")
+       trust std.stdio.print("This is trusted now")
    }
 
 Trust Propagation
@@ -315,7 +315,7 @@ Trust Propagation Example
 
    // Trusted function - performs I/O
    fn print_message() void! = {
-       std.io.print("Message")
+       std.stdio.print("Message")
    }
 
    // Verified function that adopts trust
@@ -441,7 +441,7 @@ When a contract condition fails, the program panics. This prevents undefined beh
 
    // This will panic at runtime if the pre-condition fails
    pub fn main() void = {
-       std.io.put_any("{d}", {trusted_function(1, -2)})
+       std.stdio.print("{d}", {trusted_function(1, -2)})
        // -2 violates the pre-condition x > 0 && y > 0
    }
 

@@ -275,7 +275,7 @@ For Loops
 .. code-block:: spectre
 
    for {
-       std.io.print("its cool")
+       std.stdio.print("its cool")
        break
    }
 
@@ -358,13 +358,13 @@ A complete Spectre program combining multiple syntax elements:
            z_is_thi : z == 30
        }
 
-       std.io.put_any("{d} {d}", {x, y})
+       std.stdio.print("{d} {d}", {x, y})
    }
 
    pub val some_constant = 1000
 
    fn pure_function() void = {
-       trust std.io.print("This is trusted now")
+       trust std.stdio.print("This is trusted now")
    }
 
    fn can_fail(should_fail: bool) option[i32]! = {
@@ -375,7 +375,7 @@ A complete Spectre program combining multiple syntax elements:
    }
 
    pub fn some_other_function() void! = {
-       std.io.print("This function has no contracts")
+       std.stdio.print("This function has no contracts")
    }
 
 Syntax Summary

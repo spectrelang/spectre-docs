@@ -174,7 +174,7 @@ Functions marked with the trust marker (``!``) can be tested like regular functi
 .. code-block:: spectre
 
    pub fn some_other_function() void! = {
-       std.io.print("This function has no contracts")
+       std.stdio.print("This function has no contracts")
    }
 
    test {

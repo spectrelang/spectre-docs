@@ -105,7 +105,7 @@ When a pre-condition fails, the program panics:
 
    pub fn main() void = {
        // This will cause a runtime error because y = -2 violates the pre-condition
-       std.io.put_any("{d}", {trusted_function(1, -2)})
+       std.stdio.print("{d}", {trusted_function(1, -2)})
    }
 
 Post-condition Violations
@@ -233,7 +233,7 @@ The following sample demonstrates a runtime error caused by contract violation:
 
    pub fn main() void = {
        // Runtime error: y = -2 violates the pre-condition
-       std.io.put_any("{d}", {trusted_function(1, -2)})
+       std.stdio.print("{d}", {trusted_function(1, -2)})
    }
 
 Trust Markers and Errors
@@ -247,7 +247,7 @@ Trusted Functions
 .. code-block:: spectre
 
    pub fn some_other_function() void! = {
-       std.io.print("This function has no contracts")
+       std.stdio.print("This function has no contracts")
    }
 
 The ``!`` marker indicates that this function is trusted but not verified. It may perform operations that could fail at runtime.
@@ -263,12 +263,12 @@ When calling trusted functions, the trust requirement must be handled:
 
    // Option 1: Adopt the trust marker
    fn caller() void! = {
-       std.io.print("Now also trusted")
+       std.stdio.print("Now also trusted")
    }
 
    // Option 2: Use manual override
    fn pure_function() void = {
-       trust std.io.print("This is trusted now")
+       trust std.stdio.print("This is trusted now")
    }
 
 Error Handling Patterns

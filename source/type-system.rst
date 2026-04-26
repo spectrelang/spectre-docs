@@ -239,7 +239,7 @@ Struct Usage in Functions
    pub fn main() void! = {
        val st: mut SomeType = {x: 30, y: 40}
        st.y = 30
-       std.io.put_any("{d}", {st.y})
+       std.stdio.print("{d}", {st.y})
    }
 
 Buffer Types
@@ -358,7 +358,7 @@ Complete Type Usage Example
 
        val result: option[i32] = check(false)
 
-       std.io.put_any("{d} {d}", {p.x, p.y})
+       std.stdio.print("{d} {d}", {p.x, p.y})
    }
 
 Type Safety Example

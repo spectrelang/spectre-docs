@@ -392,10 +392,10 @@ I/O Functions
 +------------------------+------------------------+------------------------+
 | Function               | Description            | Example                |
 +========================+========================+========================+
-| ``std.io.print(msg)``  | Print a string         | ``std.io.print("Hello``|
+| ``std.stdio.print(msg)``  | Print a string         | ``std.stdio.print("Hello``|
 |                        |                        | ")``                   |
 +------------------------+------------------------+------------------------+
-| ``std.io.put_any(fmt,  | Print formatted output | ``std.io.put_any("{d}" |
+| ``std.stdio.print(fmt,  | Print formatted output | ``std.stdio.print("{d}" |
 | args)``                |                        | , {x})``               |
 +------------------------+------------------------+------------------------+
 

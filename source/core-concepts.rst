@@ -212,11 +212,11 @@ Example: Trust in Practice
    val std = use("std")
 
    pub fn some_other_function() void! = {
-       std.io.print("This function has no contracts, thus the return type is marked !")
+       std.stdio.print("This function has no contracts, thus the return type is marked !")
    }
 
    fn pure_function() void = {
-       trust std.io.print("This is trusted now, and can therefore run in a pure function")
+       trust std.stdio.print("This is trusted now, and can therefore run in a pure function")
    }
 
 Option Types
