@@ -111,7 +111,7 @@ Contract conditions can be labeled for better error reporting:
        }
    }
 
-Labels are optional. Unlabeled conditions are also valid:
+As aforementioned, unlabeled conditions are also valid:
 
 .. code-block:: spectre
 
