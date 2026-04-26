@@ -177,7 +177,7 @@ Functions that do not contain formal contracts or perform unverifiable side effe
 
    // Trusted function - no contracts, performs I/O
    fn print_data() void! = {
-       @printf("{d}\n", {10})
+       @print("{d}\n", {10})
    }
 
 Trust Propagation

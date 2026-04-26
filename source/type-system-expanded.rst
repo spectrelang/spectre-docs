@@ -150,7 +150,7 @@ Example (creating and mutating tokens):
 .. code-block:: spectre
 
    pub fn mutate_token(t: mut Token) void = {
-       @printf("{d}\n", {t.line})
+       @print("{d}\n", {t.line})
        t.line = t.line - 20
        // If this leaves the invariant false, a runtime check may fail in debug builds.
    }
