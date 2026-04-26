@@ -179,7 +179,7 @@ Module Imports
    val identifier = use("std")
 
    // Import specific file
-   val identifier = use("filename.spr")
+   val identifier = use("filename.sx")
 
 Test Blocks
 ~~~~~~~~~~~

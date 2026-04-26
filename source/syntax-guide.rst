@@ -207,7 +207,7 @@ Importing Specific Files
 
 .. code-block:: spectre
 
-   val some_other_module = use("some_other_module.spr")
+   val some_other_module = use("some_other_module.sx")
 
 Expressions
 -----------

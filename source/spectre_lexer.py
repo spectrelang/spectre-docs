@@ -5,7 +5,7 @@ from pygments.token import *
 class SpectreLexer(RegexLexer):
     name = "Spectre"
     aliases = ["spectre"]
-    filenames = ["*.spr"]
+    filenames = ["*.sx"]
 
     tokens = {
         "root": [

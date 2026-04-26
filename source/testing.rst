@@ -297,7 +297,7 @@ Test Files
 
 Tests can be placed in the same file as the code they test, or in separate test files:
 
-**math.spr:**
+**math.sx:**
 
 .. code-block:: spectre
 
@@ -385,13 +385,7 @@ The method for running tests depends on the Spectre toolchain. Typically, tests 
 
 ::
 
-   spectre test <file.spr>
-
-Or for a full project:
-
-::
-
-   spectre test
+   spectre <file.sx> --test
 
 Test Output
 -----------

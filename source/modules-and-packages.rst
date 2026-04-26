@@ -41,7 +41,7 @@ Specific source files can be imported by providing the file path:
 
 .. code-block:: spectre
 
-   val some_other_module = use("some_other_module.spr")
+   val some_other_module = use("some_other_module.sx")
 
 Module Binding
 ~~~~~~~~~~~~~~
@@ -117,7 +117,7 @@ A typical Spectre module follows this structure:
 
    // 1. Module imports
    val std = use("std")
-   val other_module = use("other_module.spr")
+   val other_module = use("other_module.sx")
 
    // 2. Type definitions
    type Point = {
@@ -202,7 +202,7 @@ Functions from other modules can be called after importing:
 .. code-block:: spectre
 
    val std = use("std")
-   val utils = use("utils.spr")
+   val utils = use("utils.sx")
 
    pub fn main() void! = {
        // Call standard library function
@@ -264,12 +264,12 @@ Basic Module Structure
 Multi-Module Program
 ~~~~~~~~~~~~~~~~~~~~
 
-**main.spr:**
+**main.sx:**
 
 .. code-block:: spectre
 
    val std = use("std")
-   val math = use("math.spr")
+   val math = use("math.sx")
 
    pub fn main() i32 = {
        val result = math.add(1, 2)
@@ -277,7 +277,7 @@ Multi-Module Program
        return 0
    }
 
-**math.spr:**
+**math.sx:**
 
 .. code-block:: spectre
 
@@ -338,16 +338,16 @@ Visibility Guidelines
 File Organization
 -----------------
 
-Spectre source files use the ``.spr`` extension. A typical project structure:
+Spectre source files use the ``.sx`` extension. A typical project structure:
 
 ::
 
    project/
-   ├── main.spr           # Entry point
-   ├── utils.spr          # Utility functions
-   ├── types.spr          # Type definitions
+   ├── main.sx           # Entry point
+   ├── utils.sx          # Utility functions
+   ├── types.sx          # Type definitions
    └── std/               # Standard library
-       └── io.spr         # I/O functionality
+       └── io.sx         # I/O functionality
 
 Summary
 -------
