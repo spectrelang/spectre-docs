@@ -19,3 +19,20 @@ The idea behind Spectre is that it enables correctness, sane data flow, and immu
 Memory is managed manually to preserve low-level control, typically through the use of a standard library allocator (Arena, Stack) or a custom allocator.
 
 The language compiles from high-level code to QBE IR, which then lowers to platform-specific assembly. There are also experimental LLVM and C99 backends. Notably there is a –translate-c feature that allows for C code to be translated to the equivalent Spectre code, which is useful for the migration of existing projects to Spectre.
+
+## Getting Started
+
+The simple hello world can be achieved via the following:
+
+```spectre
+val std = use("std")
+
+pub fn main() i32 = {
+    trust std.stdio.print("Hello, world: {d}.", {10})
+    return 0
+}
+```
+
+You will notice the trust keyword here. Any operation (such as IO) that has an underlying unsafe mechanism (such as the @print builtin that std.stdio.print uses), must be explicitly trusted, as it is inherently impure.
+
+This is unless you use the safe wrappers around those functions, that use preconds, invariants, etc…, or if you use simpler functions altogether. There is no need, for example, to "trust" a simple `@puts`, since, unless there’s a severe OOM error, it won’t fail. Thus, it is marked as safe in the standard library.

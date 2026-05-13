@@ -4,7 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   srcDir: "docs",
   
-  title: "Spectre",
+  title: "Spectre Docs",
   description: "Documentation for the Spectre Programming Language",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
