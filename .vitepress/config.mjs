@@ -42,6 +42,7 @@ export default defineConfig({
           { text: 'Postconditions', link: '/postconditions' },
           { text: 'Invariants', link: '/invariants' },
           { text: 'Assertions', link: '/assertions' },
+          { text: 'Trust Propagation', link: '/trust-propagation' },
         ]
       },
       {
