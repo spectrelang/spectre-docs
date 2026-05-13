@@ -32,7 +32,7 @@ export default defineConfig({
           { text: 'Error Handling', link: '/error-handling' },
           { text: 'Interfaces/Specifications', link: '/specifications' },
           { text: 'Generics', link: '/generics' },
-          { text: 'Type-Argument Constraints', link: '/typearg-constraints' },
+          { text: 'Type-Argument Constraints', link: '/type-argument-constraints' },
         ]
       },
       {
