@@ -1,6 +1,8 @@
 # Preconditions
 
-Preconditions can be applied at the function-level only, and are constructed through the use of the `pre` keyword. If we want our precondition check to persist into release builds, we would use the `guarded` keyword prior to `pre`.
+Preconditions are some conditions that are checked prior to the function-body execution.
+
+They can be applied at the function-level only, and are constructed through the use of the `pre` keyword. If we want our precondition check to persist into release builds, we would use the `guarded` keyword prior to `pre`.
 
 So a regular, non-release build persistent precondition would happen at runtime (or compile-time where possible):
 
