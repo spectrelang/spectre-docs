@@ -20,6 +20,7 @@ export default defineConfig({
           { text: 'Types', link: '/types' },
           { text: 'Functions', link: '/functions' },
           { text: 'Control Flow', link: '/control-flow' },
+          { text: 'Pattern Matching', link: '/pattern-matching' },
           { text: 'Modules and Imports', link: '/modules-and-imports' },
           { text: 'Error Handling', link: '/error-handling' },
         ]
