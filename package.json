@@ -1,14 +1,7 @@
 {
-  "name": "my-docs",
-  "version": "0.0.1",
-  "private": true,
-  "type": "module",
   "scripts": {
-    "dev": "docmd dev",
-    "build": "docmd build",
-    "preview": "npx serve site"
-  },
-  "dependencies": {
-    "@docmd/core": "^0.8.0"
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
   }
 }
