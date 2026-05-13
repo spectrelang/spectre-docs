@@ -1,0 +1,1 @@
+Print some formatted string to stdout, takes two arguments, the format string and the `untyped` argspack.
