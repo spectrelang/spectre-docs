@@ -1,0 +1,1 @@
+Print some string literal with a newline appended to the end.
