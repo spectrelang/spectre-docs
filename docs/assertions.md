@@ -8,5 +8,4 @@ For example:
 assert 1 + 1 == 2
 ```
 
-
 More complex expressions can also be put after the assert, and parenthesis following the `assert` keyword are optional, as is observable above.
