@@ -36,3 +36,7 @@ pub fn main() i32 = {
 You will notice the trust keyword here. Any operation (such as IO) that has an underlying unsafe mechanism (such as the @print builtin that std.stdio.print uses), must be explicitly trusted, as it is inherently impure.
 
 This is unless you use the safe wrappers around those functions, that use preconds, invariants, etc…, or if you use simpler functions altogether. There is no need, for example, to "trust" a simple `@puts`, since, unless there’s a severe OOM error, it won’t fail. Thus, it is marked as safe in the standard library.
+
+## Foreword
+
+These docs may be out of date and are not guaranteed to reflect the up-to-date Spectre API.

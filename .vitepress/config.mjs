@@ -15,10 +15,14 @@ export default defineConfig({
 
     sidebar: [
       {
-        text: 'Examples',
+        text: 'Fundamentals',
         items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
+          { text: 'Variables', link: '/vars' },
+          { text: 'Types', link: '/types' },
+          { text: 'Functions', link: '/functions' },
+          { text: 'Control Flow', link: '/control-flow' },
+          { text: 'Modules and Imports', link: '/modules-and-imports' },
+          { text: 'Error Handling', link: '/error-handling' },
         ]
       }
     ],
