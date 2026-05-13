@@ -26,3 +26,9 @@ pub extern (C) fn my_malloc(size: usize) = "malloc"
 ```
 
 Here we're using the libc malloc as our extern example, but depending on what is linked, you can use any raw C symbol in the place of malloc in the above example.
+
+___
+
+# Other things of note
+
+There are no closures. Nested functions do not exist in this language, and for good reason. It decreases the readability of code, and adds unnecessary complexity to the compiler internals for a feature that does not add much value.
