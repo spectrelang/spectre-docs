@@ -31,6 +31,15 @@ export default defineConfig({
           { text: 'Modules and Imports', link: '/modules-and-imports' },
           { text: 'Error Handling', link: '/error-handling' },
         ]
+      },
+      {
+        text: 'DbC Concepts',
+        items: [
+          { text: 'Preconditions', link: '/preconditions' },
+          { text: 'Postconditions', link: '/postconditions' },
+          { text: 'Invariants', link: '/invariants' },
+          { text: 'Assertions', link: '/assertions' },
+        ]
       }
     ],
 
