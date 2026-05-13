@@ -30,6 +30,9 @@ export default defineConfig({
           { text: 'Pattern Matching', link: '/pattern-matching' },
           { text: 'Modules and Imports', link: '/modules-and-imports' },
           { text: 'Error Handling', link: '/error-handling' },
+          { text: 'Interfaces/Specifications', link: '/specifications' },
+          { text: 'Generics', link: '/generics' },
+          { text: 'Type-Argument Constraints', link: '/typearg-constraints' },
         ]
       },
       {
