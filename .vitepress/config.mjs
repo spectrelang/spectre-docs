@@ -33,6 +33,7 @@ export default defineConfig({
           { text: 'Interfaces/Specifications', link: '/specifications' },
           { text: 'Generics', link: '/generics' },
           { text: 'Type-Argument Constraints', link: '/type-argument-constraints' },
+          { text: 'Tagged Unions', link: '/tagged-unions' },
         ]
       },
       {

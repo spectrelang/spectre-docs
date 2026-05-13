@@ -1,0 +1,1 @@
+Dereferences some pointer.
