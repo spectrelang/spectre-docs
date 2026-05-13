@@ -1,0 +1,1 @@
+Load an 8-byte (typically pointer) value

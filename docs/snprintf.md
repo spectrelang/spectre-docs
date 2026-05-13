@@ -1,0 +1,1 @@
+Behaves the same as in C.

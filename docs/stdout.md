@@ -1,0 +1,1 @@
+Get standard output stream.

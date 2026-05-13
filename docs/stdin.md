@@ -1,0 +1,1 @@
+Get standard input stream.
