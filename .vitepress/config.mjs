@@ -14,6 +14,13 @@ export default defineConfig({
 
     sidebar: [
       {
+        text: 'Meta',
+        items: [
+          { text: 'Installation', link: '/installation' },
+          { text: 'About', link: '/about' }
+        ]
+      },
+      {
         text: 'Fundamentals',
         items: [
           { text: 'Variables', link: '/vars' },

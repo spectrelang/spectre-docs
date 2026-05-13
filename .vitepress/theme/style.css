@@ -129,3 +129,6 @@
   --vp-custom-block-tip-code-bg: var(--vp-c-brand-soft);
 }
 
+footer.VPFooter {
+    display: block !important;
+}
