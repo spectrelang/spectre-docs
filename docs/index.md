@@ -4,7 +4,7 @@
 
 # Spectre 
 
-Spectre is a simple programming language meant for safe and contract based low-level systems programming.
+Spectre is a programming language meant for safe and contract based low-level systems programming.
 
 It allows for type-level invariants, and function-level preconditions and postconditions, it enables safety through use of immutability by default.
 
