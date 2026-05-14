@@ -8,7 +8,7 @@ pub fn danger_func() void = trust {
 }
 ```
 
-Then this function must be explicitly `trust`ed at each of its callsite, or be called from a trusted context. This is somewhat akin to the "unsafe" concept from other languages, however it adopts the inverse semantics and revolves around the DbC verification guarantees rather than generally-dangerous functions.
+Then this function must be explicitly `trust`ed at each of its callsites, or be called from a trusted context. This is somewhat akin to the "unsafe" concept from other languages, however it adopts the inverse semantics and revolves around the DbC verification guarantees rather than generally-dangerous functions.
 
 ## Trust Blocks
 
