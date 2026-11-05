@@ -1,6 +1,6 @@
 # Tagged Unions
 
-They can be defined and used like so:
+Tagged unions are declared and used as follows:
 
 ```spectre
 val math = use("std/math")
@@ -18,5 +18,7 @@ fn area(s: Shape) f64 = {
             return math.sqrt(sp * (sp - a) * (sp - b) * (sp - c))
         }
     }
-}      
+}
 ```
+
+A match arm selects a variant by its tag and binds the payload fields of that variant. A variant with no payload is written with empty parentheses, both in its declaration and in a match arm.

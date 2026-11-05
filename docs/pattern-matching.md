@@ -1,6 +1,6 @@
 # Pattern Matching
 
-Pattern matching can be done through the use of the `match` keyword followed by `some` or `none` if working on `option[T]`, otherwise you can use `ok _` and `err _` to capture the OK or error values.
+Pattern matching is performed with the `match` keyword. An `option[T]` is matched with `some` and `none`; a `result[T, E]` is matched with `ok` and `err`.
 
 Example for `option[T]`:
 
@@ -9,25 +9,25 @@ val some_list = [1, 2, 3]
 val x_opt = @get(some_list, 5)
 
 match x_opt {
-    some v => {
-        // Not going to happen.
-        // But we have to use v in this scope anyway
-        // ...because otherwise we will get an unused variable error.
+    some _ => {
+        // Not reached.
     }
     none => {
         @puts(
-            \\ As expected, the list isn't big enough to get index 5 from it
-            \\ So instead of panicking, we do this.
+            \\ As expected, the list is not large enough to contain index 5.
+            \\ Instead of panicking, this branch handles the case explicitly.
         )
     }
 }
 ```
 
-Note that `\\` is the syntax for multiline strings. Not to be confused with the comments, which are prefixed with `//`.
+The `\\` syntax denotes a multiline string literal, not a comment. Comments begin with `//`.
 
-Same for error values, we could, for example, do the following:
+The following example handles a `result` value:
 
 ```spectre
+val stdio = use("std/stdio")
+
 pub enum SomeError = {
     DidntWork
 }
@@ -36,21 +36,19 @@ pub fn some_errorable_func() result[ref u8, SomeError] = {
     return err SomeError.DidntWork
 }
 
-pub fn main() void = {
+pub fn main() void = trust {
     match some_errorable_func() {
         ok v => {
-            @print("Not going to happen: {s}", {v})
+            stdio.print("Not going to happen: {s}\n", {v})
         }
         err e => {
-            @print("Got this error: {d}", {e})
+            stdio.print("Got this error: {d}\n", {e})
         }
     }
 }
 ```
 
-Pattern matching also works on strings, enums, and numerical values.
-
-For example:
+Pattern matching also applies to strings, enumerations, and numerical values:
 
 ```spectre
 val stdio = use("std/stdio")

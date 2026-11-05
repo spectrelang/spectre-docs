@@ -1,6 +1,6 @@
 # Trust Propagation
 
-Trust is propagated across functions through the use of the `trust` keyword. So for example, if a function is marked with `trust` at the definition/top-level, like so:
+Trust is propagated across function boundaries through the `trust` keyword. A function whose body is introduced with `trust` is a trusted function:
 
 ```spectre
 pub fn danger_func() void = trust {
@@ -8,11 +8,11 @@ pub fn danger_func() void = trust {
 }
 ```
 
-Then this function must be explicitly `trust`ed at each of its callsites, or be called from a trusted context. This is somewhat akin to the "unsafe" concept from other languages, however it adopts the inverse semantics and revolves around the DbC verification guarantees rather than generally-dangerous functions.
+A call to a trusted function from an untrusted context must itself be wrapped in `trust`, or must occur in a context that is already trusted. This is related to the `unsafe` concept in other languages, although it has inverse semantics and is centered on design-by-contract verification guarantees rather than on generally dangerous operations.
 
 ## Trust Blocks
 
-Trust can be applied in blocks, for example:
+Trust may be applied to a block:
 
 ```spectre
 trust {
@@ -26,7 +26,7 @@ trust {
 
 ## Inline Trust
 
-Trust can be applied inline, too. For example:
+Trust may also be applied to an individual expression:
 
 ```spectre
 trust some_function()

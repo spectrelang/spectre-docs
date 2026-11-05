@@ -1,16 +1,18 @@
 # Declaring functions
 
-Functions are declared through the use of the `fn` keyword. Like types and values, they can be declared as public through the use of `pub`.
+Functions are declared with the `fn` keyword. Like types and values, they may be declared public with `pub`.
 
-The main function is a special case, in that it acts as the entry point of the program automatically. The main function must return void or a signed integer, and should not take any arguments. To read commandline arguments you would use the `@args()` builtin.
+The `main` function is the program entry point. It shall return `void` or a signed integer type, and it shall not declare parameters. Command-line arguments are obtained through the `@args()` intrinsic.
 
-An example of a main functions that prints out the arguments, note that `@args` returns a `list[ref u8]` containing all the commandline arguments as raw strings:
+The following `main` function prints its command-line arguments. The `@args()` intrinsic returns a `list[ref u8]` containing the arguments as raw strings:
 
 ```spectre
+val stdio = use("std/stdio")
+
 pub fn main() void = {
     val arguments = @args()
     for arg in arguments {
-        @print("{s}\n", {arg})
+        stdio.puts(arg)
     }
 }
 ```
@@ -19,16 +21,16 @@ ___
 
 # Extern functions
 
-Externs can be declared through the use of the `extern fn` construct, like so:
+External functions are declared with the `extern fn` construct:
 
 ```spectre
-pub extern (C) fn my_malloc(size: usize) = "malloc"
+pub extern (C) fn my_malloc(size: usize) ref void = "malloc"
 ```
 
-Here we're using the libc malloc as our extern example, but depending on what is linked, you can use any raw C symbol in the place of malloc in the above example.
+The example uses the libc `malloc` function. Depending on the linked libraries, any raw C symbol may be used in place of `malloc`.
 
 ___
 
-# Other things of note
+# Other considerations
 
-There are no closures. Nested functions do not exist in this language, and for good reason. It decreases the readability of code, and adds unnecessary complexity to the compiler internals for a feature that does not add much value.
+The language has no closures and no nested function declarations. This restriction keeps control flow explicit and reduces complexity in the compiler.

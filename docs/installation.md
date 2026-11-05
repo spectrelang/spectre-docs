@@ -1,13 +1,23 @@
-The Spectre toolchain can be installed in several ways. The easiest of which is to run the `get.sh` script from https://spectrelang.org/get.sh, or for Windows, the `get.ps1` script from https://spectrelang.org/get.ps1.
+# Installation
 
-The shortcut for doing this is simply running on POSIX systems (MacOS, Linux, etc...):
+The Spectre toolchain can be installed in several ways. The simplest is to run the installation script from https://spectrelang.org/get.sh, or, on Windows, from https://spectrelang.org/get.ps1.
 
-```
+The corresponding commands for POSIX systems (macOS, Linux, and others) and for Windows are shown below.
+
+On POSIX systems:
+
+```sh
 curl https://spectrelang.org/get.sh | sh
 ```
 
-Or on Windows:
+On Windows:
 
-```
+```powershell
 irm https://spectrelang.org/get.ps1 | iex
+```
+
+After installation, the compiler version can be checked with:
+
+```sh
+spectre -v
 ```

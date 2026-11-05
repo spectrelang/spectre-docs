@@ -106,6 +106,19 @@
   --vp-home-hero-image-filter: blur(44px);
 }
 
+.spectre-hero {
+  display: flex;
+  justify-content: center;
+  padding: 1.75rem 0 0.75rem;
+}
+
+.spectre-hero-logo {
+  width: 92px;
+  height: auto;
+  opacity: 0.92;
+  filter: drop-shadow(0 12px 28px rgba(65, 209, 255, 0.22));
+}
+
 @media (min-width: 640px) {
   :root {
     --vp-home-hero-image-filter: blur(56px);

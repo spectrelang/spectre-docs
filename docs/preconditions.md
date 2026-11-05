@@ -1,27 +1,26 @@
 # Preconditions
 
-Preconditions are some conditions that are checked prior to the function-body execution.
+A precondition states an obligation on the caller and on the program state at the point at which the contract statement executes. It is introduced with the `pre` keyword. To preserve the check in release builds, the `guarded` modifier is placed before `pre`.
 
-They can be applied at the function-level only, and are constructed through the use of the `pre` keyword. If we want our precondition check to persist into release builds, we would use the `guarded` keyword prior to `pre`.
+A contract statement may appear at any point in a function body. By convention, preconditions are placed at the beginning of a function.
 
-So a regular, non-release build persistent precondition would happen at runtime (or compile-time where possible):
+An ordinary precondition is checked at runtime, and at compile time where possible:
 
-```
+```spectre
 fn some_function(x: i32) bool = {
     pre {
-        x > 0
+        positive: x > 0
     }
     return true
 }
 ```
 
-And a release-build persistent precondition would be defined like so:
+A release-build persistent precondition is declared as follows:
 
-
-```
+```spectre
 fn some_other_function(x: usize) void = {
     guarded pre {
-        x > 20
+        large_enough: x > 20
     }
     do_some_other_thing()
 }

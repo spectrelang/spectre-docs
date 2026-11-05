@@ -1,6 +1,6 @@
 # Assertions
 
-Assertions work in Spectre as they would in any other imperative programming language.
+Assertions are runtime checks that are independent of contract annotations. The `assert` statement evaluates a boolean expression and terminates the program if the result is false. Assertions are checked in every build mode, including release builds.
 
 For example:
 
@@ -8,4 +8,4 @@ For example:
 assert 1 + 1 == 2
 ```
 
-More complex expressions can also be put after the assert, and parenthesis following the `assert` keyword are optional, as is observable above.
+More complex expressions may also follow the `assert` keyword. Parentheses around the condition are optional.

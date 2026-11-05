@@ -1,4 +1,6 @@
 import { defineConfig } from "vitepress";
+import spectre from "./languages/spectre.mjs";
+import ebnf from "./languages/ebnf.mjs";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -9,6 +11,9 @@ export default defineConfig({
   head: [
     ["link", { rel: "icon", type: "image/png", href: "/icon-transparent.png" }],
   ],
+  markdown: {
+    languages: [spectre, ebnf],
+  },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [

@@ -1,8 +1,8 @@
 # Declaring types
 
-Unless types are declared as external types through the use of the `extern` keyword, their attributes are not compatible with the C ABI.
+Unless a type is declared as an external type through the `extern` keyword, its layout is not compatible with the C ABI.
 
-Types can be declared through the use of the `type` keyword, like so:
+Types are declared with the `type` keyword:
 
 ```spectre
 type Point = {
@@ -11,23 +11,25 @@ type Point = {
 }
 ```
 
-This is a simple type with two attributes, x and y. 
+This declares a type with two fields, `x` and `y`.
 
-It can be instantiated like so:
+A value of the type can be constructed as follows:
 
 ```spectre
-pub fn main() void = {
-    val x: Point = {
-        x: 10
-        y: 20
-    }
-    @print("{p}\n", {x})
+val stdio = use("std/stdio")
+
+type Point = {
+    x: i64
+    y: i64
+}
+
+pub fn main() void = trust {
+    val point: Point = Point{x: 10, y: 20}
+    stdio.print("x = {d}, y = {d}\n", {point.x, point.y})
 }
 ```
 
-The above program, when combined with the `Point` type definition, will print the memory location of the value `x`.
-
-If we wanted the C compatible version of a "struct", we would do the following:
+If a C-compatible struct is required, the type can be declared as an external type:
 
 ```spectre
 extern type SomeType = {
@@ -36,13 +38,14 @@ extern type SomeType = {
     z: f64
 }
 ```
+
 ___
 
-# Types that derive from specifications
+# Types that conform to specifications
 
-Note that types can derive from specifications, which are declared with the `spec` keyword.
+A type may conform to a specification, which is declared with the `spec` keyword.
 
-A type derived from a specification might look like:
+A type that conforms to a specification is written as follows:
 
 ```spectre
 type (SomeSpec) SomeType = {
@@ -51,9 +54,7 @@ type (SomeSpec) SomeType = {
 }
 ```
 
-Note that this type will then require all the functions defined in the abstract `SomeSpec` to be implemented for the type `SomeType`.
-
-Thus, `SomeSpec` may look something like this:
+The type is then required to implement every function declared in `SomeSpec`. A specification may be declared as follows:
 
 ```spectre
 pub spec SomeSpec = {
@@ -62,11 +63,11 @@ pub spec SomeSpec = {
 }
 ```
 
-This would require the functions `some_function` and `some_other_function` to be defined for `SomeType`, since it derives from `SomeSpec`.
+This requires the functions `some_function` and `some_other_function` to be defined for `SomeType`, because `SomeType` conforms to `SomeSpec`.
 
-To define functions on types, we would use the familiar Oberon-style syntax:
+Functions are defined on types with the Oberon-style receiver syntax:
 
-```
+```spectre
 pub fn (SomeType) some_other_function() i32 = {
     return 42 as i32
 }

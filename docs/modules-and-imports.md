@@ -1,27 +1,27 @@
 # Modules and imports
 
-There is no complex module system. Instead, files act as modules. So for example, if we have a file `hello.sx`, we would simply import it from another file using a `use` directive bound to some `val`:
+The module system is file-based: each file acts as a module. For example, a file `hello.sx` is imported from another file by binding a `use` expression to a value:
 
 ```spectre
 val hello = use("hello.sx")
 ```
 
-Note that values bound to use directives at the top-level that are *not* used is a compile-time error.
+A value bound to a `use` expression at the top level that is not used is a compile-time error.
 
-There is a magic filename for libraries, namely `core.sx`, that allows us to have an implicit entry point for some group of modules. So for example, if we had a file `core.sx` in a directory named `some_dir`, we could simply do, from another directory:
+The filename `core.sx` has special significance: it provides an implicit entry point for a group of modules. For example, if a directory named `some_dir` contains a `core.sx` file, the module can be imported from another directory as follows:
 
 ```spectre
 val some_mod = use("./path/to/some_dir")
 ```
 
-And this would allow us to access the functions available in `./path/to/some_dir/core.sx`.
+The functions in `./path/to/some_dir/core.sx` are then accessible through `some_mod`.
 
-`core.sx` is leveraged in the Spectre standard library to allow for clean entry points to standard library module-groups. So for example:
+The Spectre standard library uses `core.sx` to provide clean entry points to standard-library module groups. For example:
 
 ```spectre
 val math = use("std/math")
 ```
 
-Will point to `<install-dir>/spectrelib/math/core.sx`.
+This resolves to `<install-dir>/spectrelib/math/core.sx`.
 
-Module imports cannot be marked as mutable, cannot have type annotations, and cannot be used in nested (non-top-level) contexts.
+Module imports cannot be marked as mutable, cannot have type annotations, and cannot appear in nested, non-top-level contexts.

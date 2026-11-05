@@ -2,39 +2,45 @@
 # https://vitepress.dev/reference/default-theme-home-page
 ---
 
+<div class="spectre-hero">
+  <img
+    src="/icon-transparent.png"
+    alt="Spectre logo"
+    class="spectre-hero-logo"
+  />
+</div>
+
 # Spectre
 
-Spectre is a programming language meant for safe and contract based low-level systems programming.
+Spectre is a statically typed, design-by-contract programming language intended for ease of use and high performance in low-level systems programming.
 
-It allows for type-level invariants, and function-level preconditions and postconditions, it enables safety through use of immutability by default.
+It provides type-level invariants and function-level preconditions and postconditions, and it enables safety through immutability by default.
 
 This documentation aims to act as a user guide for the Spectre programming language.
 
 ## Justification
 
-The concept behind Spectre is that it enables correctness, sane data flow, and immutability by default, such that low level programming is safer, though at the same time prevents interrupting the convenience and DX of the language and its toolchain. Contracts are evaluated at compile-time where possible, however to avoid the complexity of similar systems such as Z3 (the SMT solver), and the inconveniences associated with the compiler being unable to prove some conditions are true, checks that cannot be evaluated at compile-time are automatically executed at runtime instead, though the persistence of the runtime checks in release builds depends on the use of the guarded construct.
+The design of Spectre is motivated by the combination of correctness, explicit data flow, and immutability by default, so that low-level programming can be safer without compromising the convenience of the language and its toolchain. Contract conditions are evaluated at compile time where possible. To avoid the complexity of systems such as Z3 (the SMT solver), and the inconvenience of conditions that the compiler cannot prove, checks that cannot be evaluated at compile time are executed at runtime instead. Whether runtime checks persist in release builds depends on the use of the `guarded` modifier.
 
-Memory is managed manually to preserve low-level control, typically through the use of a standard library allocator (Arena, Stack) or a custom allocator.
+Memory is managed manually to preserve low-level control, typically through a standard-library allocator such as `Arena` or `Stack`, or through a custom allocator.
 
-The language compiles from high-level code to QBE IR, which then lowers to platform-specific assembly. There are also experimental MSVC/Clang backends. Notably there is a –translate-c feature that allows for C code to be translated to the equivalent Spectre code, which is useful for the migration of existing projects to Spectre.
+The language compiles from high-level code to QBE IR, which is then lowered to platform-specific assembly. Experimental MSVC/Clang backends are also available. The `--translate-c` feature translates C source into equivalent Spectre source, which is useful when migrating existing projects.
 
 ## Getting Started
 
-The simple hello world can be achieved via the following:
+A minimal "hello world" program is shown below:
 
 ```spectre
-val std = use("std")
+val stdio = use("std/stdio")
 
-pub fn main() i32 = {
-    trust std.stdio.print("Hello, world: {d}.", {10})
+pub fn main() i32 = trust {
+    stdio.print("Hello, world: {d}.\n", {10})
     return 0
 }
 ```
 
-You will notice the trust keyword here. Any operation (such as IO) that has an underlying unsafe mechanism (such as the @print builtin that std.stdio.print uses), must be explicitly trusted, as it is inherently impure.
-
-This is unless you use the safe wrappers around those functions, that use preconds, invariants, etc…, or if you use simpler functions altogether. There is no need, for example, to "trust" a simple `@puts`, since, unless there’s a severe OOM error, it won’t fail. Thus, it is marked as safe in the standard library.
+The `trust` keyword appears in this example. Any operation, such as formatted output, that has an underlying unsafe mechanism, such as the `@print` intrinsic used by `stdio.print`, must be explicitly trusted. Safe wrappers that use preconditions, invariants, and similar constructs, or simpler operations, do not require this. For example, `stdio.puts` does not require `trust`, because it is marked as safe in the standard library: barring a severe allocation failure, it cannot fail.
 
 ## Foreword
 
-These docs may be out of date and are not guaranteed to reflect the up-to-date Spectre API.
+These documents describe the language and its standard-library conventions. The formal specification is the normative reference for the language.

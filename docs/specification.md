@@ -164,7 +164,7 @@ A function-pointer type has the form `fn(T1, T2, ...) R`. It denotes a reference
 
 A specification declares an interface. Its body contains function declarations, each optionally marked `pub`, and each having a name, a parameter list, and a return type. A specification describes a set of method signatures; it is not a runtime object and has no vtable representation.
 
-A named type conforms to a specification by writing the specification name in parentheses after `type`, as in `type (SomeSpec) SomeType = { ... }`. The type shall provide a namespaced function whose name and signature match every function declared by the specification. The special parameter type `self` in a specification method denotes the implementing type; it is substituted textually in the method signature. Method calls are resolved statically to namespaced functions. A specification may be empty, in which case it serves as an opaque handle type.
+A named type conforms to a specification by writing the specification name in parentheses after `type`, as in `type (SomeSpec) SomeType = { ... }`. The type shall provide a namespaced function whose name and signature match every function declared by the specification. The special parameter type `self` in a specification method denotes the implementing type; it is substituted textually in the method signature. Method calls are resolved statically to namespaced functions. A specification may be empty, in which case it acts as an opaque handle type.
 
 ### 3.12 Type identity and conversions
 

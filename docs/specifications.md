@@ -1,6 +1,6 @@
 # Specifications
 
-These are defined with the `spec` keyword and define some interface for the purposes of static dispatch. Specifications defined with `spec` result in NO runtime overhead.
+A specification declares an interface for static dispatch. It is introduced with the `spec` keyword and imposes no runtime overhead.
 
 Example definition of a specification:
 
@@ -12,9 +12,7 @@ spec SomeSpec = {
 }
 ```
 
-A type can derive from a specification through the use of the Oberon-style syntax previously described in the "Types" section of the documentation.
-
-To re-iterate the example:
+A type conforms to a specification through the Oberon-style syntax described in the types section:
 
 ```spectre
 type (SomeSpec) SomeType = {

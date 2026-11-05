@@ -1,27 +1,26 @@
 # Postconditions
 
-Postconditions are some conditions that are checked after the main function-body.
+A postcondition states an obligation on the function at the point at which the contract statement executes. It is introduced with the `post` keyword. To preserve the check in release builds, the `guarded` modifier is placed before `post`.
 
-They can be applied at the function-level only, and are constructed through the use of the `post` keyword. If we want our postcondition check to persist into release builds, we would use the `guarded` keyword prior to `post`.
+A contract statement may appear at any point in a function body. Postconditions are conventionally placed immediately before a `return` statement, because a postcondition placed after `return` is unreachable.
 
-So a regular, non-release build persistent postcondition would happen at runtime only:
+An ordinary postcondition is checked at runtime:
 
-```
+```spectre
 fn some_function(x: i32) bool = {
     post {
-        x > 0
+        positive: x > 0
     }
     return true
 }
 ```
 
-And a release-build persistent postcondsition would be defined like so:
+A release-build persistent postcondition is declared as follows:
 
-
-```
+```spectre
 fn some_other_function(x: usize) void = {
     guarded post {
-        x > 20
+        large_enough: x > 20
     }
     do_some_other_thing()
 }
