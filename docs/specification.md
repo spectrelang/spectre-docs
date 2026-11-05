@@ -3,11 +3,11 @@ title: Formal Specification
 outline: deep
 ---
 
-# The Spectre Language Specification
+# The Spectre Programming Language Specification
 
-**Document status.** This document specifies the core Spectre programming language as accepted by the reference compiler and as observed in compiled programs. It is a working specification of the language, not of the standard library. Standard-library types and functions are referenced only where they constitute the canonical realization of a language-level convention, principally the allocator protocol. The specification does not define the QBE intermediate representation, the platform assembler, the linker, or the C ABI, except where those are observable from source programs.
+This document specifies the core Spectre programming language as accepted by the reference compiler and as observed in compiled programs. It is a working specification of the language, not of the standard library. Standard-library types and functions are referenced only where they constitute the canonical realization of a language-level convention, principally the allocator protocol. The specification does not define the QBE intermediate representation, the platform assembler, the linker, or the C ABI, except where those are observable from source programs.
 
-**Normative language.** The words *shall*, *must*, *should*, and *may* are used in their conventional normative sense. A statement marked as an implementation note describes the reference implementation and does not by itself constrain every conforming implementation.
+The words *shall*, *must*, *should*, and *may* are used in their conventional normative sense. A statement marked as an implementation note describes the reference implementation and does not by itself constrain every conforming implementation.
 
 ## 1. Scope and Conformance
 
@@ -789,7 +789,7 @@ extern-decl    = "extern" STRING
                  "{" { field | invariant } "}"
                | "extern" "(" IDENT { "," IDENT } ")" "fn" IDENT
                  "(" [ extern-params ] ")" type "=" STRING ;
-extern-params  = "..." 
+extern-params  = "..."
                | extern-param { "," extern-param } [ "," "..." ] ;
 extern-param   = IDENT ":" type ;
 
