@@ -2,20 +2,27 @@
 
 Functions are declared with the `fn` keyword. Like types and values, they may be declared public with `pub`.
 
-The `main` function is the program entry point. It shall return `void` or a signed integer type, and it shall not declare parameters. Command-line arguments are obtained through the `@args()` intrinsic.
+The `main` function is the program entry point. It shall return `void` or a signed integer type, and it shall not declare parameters. Command-line arguments are obtained through the allocator-aware `@argsalloc[A](ac)` intrinsic.
 
-The following `main` function prints its command-line arguments. The `@args()` intrinsic returns a `list[ref u8]` containing the arguments as raw strings:
+The following `main` function prints its command-line arguments. `@argsalloc` returns a `result[list[ref u8], E]` containing the arguments as raw strings; the list is released with `@listfree`.
 
 ```spectre
+val allocators = use("std/allocators")
 val stdio = use("std/stdio")
 
 pub fn main() void = {
-    val arguments = @args()
+    val ac: allocators.HeapAllocator = @zeroed
+    val arguments: list[ref u8] = @argsalloc[allocators.HeapAllocator](ac)?
+    defer {
+        @listfree(arguments)
+    }
     for arg in arguments {
         stdio.puts(arg)
     }
 }
 ```
+
+The reference implementation also retains the non-allocator `@args()` form for compatibility, but new code should use `@argsalloc`.
 
 ___
 
