@@ -45,7 +45,7 @@ Newlines are not significant syntactic tokens. There is no automatic semicolon i
 
 ### 2.3 Reserved words
 
-The reserved words of the language are `fn`, `spec`, `val`, `mut`, `pub`, `type`, `pre`, `post`, `return`, `if`, `else`, `elif`, `trust`, `use`, `ref`, `for`, `in`, `some`, `none`, `ok`, `err`, `match`, `true`, `false`, `defer`, `break`, `continue`, `as`, `assert`, `when`, `union`, `enum`, `extern`, `link`, `lib`, `guarded`, `not`, `test`, `guard`, and `invariant`.
+The reserved words of the language are `fn`, `spec`, `val`, `mut`, `pub`, `type`, `pre`, `post`, `return`, `if`, `else`, `elif`, `trust`, `inline`, `use`, `ref`, `for`, `in`, `some`, `none`, `ok`, `err`, `match`, `true`, `false`, `defer`, `break`, `continue`, `as`, `assert`, `when`, `union`, `enum`, `extern`, `link`, `lib`, `guarded`, `not`, `test`, `guard`, and `invariant`.
 
 The following words are contextual rather than reserved. The words `is`, `or`, and `otherwise` are recognized in specific grammatical positions and are otherwise ordinary identifiers. The word `_` is an ordinary identifier used as a wildcard or inference marker. The words `self`, `void`, `argspack`, `option`, `result`, and `list` are ordinary identifiers whose text receives special interpretation in type position or in a method signature. The word `header` is a modifier in an extern declaration. Intrinsic names following `@` are ordinary identifiers validated by the semantic analyzer rather than by the lexer.
 
@@ -202,7 +202,7 @@ A top-level immutable value is written `val name = expression` or `val name: T =
 
 ### 4.5 Functions and methods
 
-A function declaration has the form `fn name(param: T, ...) R = { ... }`. The return type is mandatory. A function body may be omitted, in which case the declaration introduces a signature without a definition. When a body is present, the `=` is mandatory and the body is a braced statement block. The modifier `trust` may appear between `=` and the opening brace, as in `fn f() T = trust { ... }`; this marks the function as requiring trust at call sites.
+A function declaration has the form `fn name(param: T, ...) R = { ... }`. The return type is mandatory. A function body may be omitted, in which case the declaration introduces a signature without a definition. When a body is present, the `=` is mandatory and the body is a braced statement block. The modifiers `inline` and `trust` may appear between `=` and the opening brace, in any order, as in `fn f() T = inline { ... }` or `fn f() T = inline trust { ... }`. The `inline` modifier requests that the compiler expand calls to the function at each call site; it is a hint and does not change the observable semantics of the program. The `trust` modifier marks the function as requiring trust at call sites.
 
 A parameter is written `name: T`. A mutable value parameter is written `name: mut T`. A mutable reference parameter is written `name: mut ref T`. A parameter of type `argspack` accepts a brace-enclosed heterogeneous pack. Parameter names are mandatory, commas separate parameters, and a trailing comma is permitted.
 
@@ -224,7 +224,7 @@ The directives `link "name"` and `lib "name"` request linkage against an externa
 
 ### 4.8 Tests
 
-A test declaration has the form `test { ... }` or `test "name" { ... }`. Tests are top-level items. When the compiler is invoked with `--test`, it suppresses the program entry point, emits a generated entry point that calls the tests of the root module, and prints a summary. A test body is a statement block and is checked in its own scope.
+A test declaration has the form `test { ... }` or `test "name" { ... }`. Tests are top-level items. When the compiler is invoked with `-test`, it suppresses the program entry point, emits a generated entry point that calls the tests of the root module, and prints a summary. A test body is a statement block and is checked in its own scope.
 
 ### 4.9 Entry point
 
@@ -692,17 +692,17 @@ A program that requires direct memory access uses the raw memory intrinsics from
 
 The reference compiler performs the following stages. The lexer converts source bytes into tokens. The parser constructs an abstract syntax tree. Module resolution loads imported modules, detects cycles, and assembles the module tree. Semantic analysis registers names, checks declarations and types where implemented, applies the contract and trust checks, and reports diagnostics. Code generation lowers the checked program to QBE intermediate representation, which is then lowered to the target assembly and linked. The alternative backend translates the intermediate representation to C or another target representation and invokes a platform C compiler.
 
-The compiler can print intermediate forms with `--ast`, `--syntax-check`, `--emit-ssa`, `--emit-alt`, and `--emit-asm`. The `--translate-c` mode translates C source into a single Spectre source file. The `--emit-shim` option writes the QBE runtime shim alongside `--emit-ssa`.
+The compiler can print intermediate forms with `-ast`, `-syntax-check`, `-emit-ssa`, `-emit-alt`, and `-emit-asm`. The `-translate-c` mode translates C source into a single Spectre source file. The `-emit-shim` option writes the QBE runtime shim alongside `-emit-ssa`.
 
 ### 9.2 Target selection
 
-The target platform for `when` selection is the host platform unless the compiler is invoked with `--src-target=<os>`. The target architecture is the host architecture. The platform names and group selectors are those listed in Section 4.10. The target selection affects which conditional declarations are analyzed and emitted; it does not change the syntax of the selected branch. The `when` selection is performed during semantic analysis and code generation, so a branch that is not selected is not type-checked as part of the program.
+The target platform for `when` selection is the host platform unless the compiler is invoked with `-src-target:<os>`. The target architecture is the host architecture. The platform names and group selectors are those listed in Section 4.10. The target selection affects which conditional declarations are analyzed and emitted; it does not change the syntax of the selected branch. The `when` selection is performed during semantic analysis and code generation, so a branch that is not selected is not type-checked as part of the program.
 
 ### 9.3 Command-line interface
 
-The compiler is invoked as `spectre <input.sx> [options]` for a single source file, or as `spectre <command> [arguments]` for a toolchain command. The principal commands are `init`, `fmt`, `critic`, `build`, `run`, `doc`, `add`, `remove`, `upgrade`, `restore`, `graph`, `ref`, `clean`, and `doctor`. The principal compilation options are `--ast`, `--syntax-check`, `--emit-ssa`, `--emit-alt`, `--emit-asm`, `--src-target=<os>`, `--translate-c`, `--inc-path=<dir>`, `--show-cmd`, `--test`, `--release`, `--dynamic`, `--dll`, `-a` or `--alt`, `-b` or `--bootstrap`, `-c` or `--compile`, `-d<NAME>=<value>`, `-o <file>`, `-l` or `--loud`, `-v` or `--version`, and `-h` or `--help`. The option `-I<headers>` is accepted only by the alternative backend.
+The compiler is invoked as `spectre <input.sx> [options]` for a single source file, or as `spectre <command> [arguments]` for a toolchain command. The principal commands are `init`, `fmt`, `critic`, `build`, `run`, `doc`, `add`, `remove`, `upgrade`, `restore`, `graph`, `ref`, `clean`, and `doctor`. The principal compilation options are `-ast`, `-syntax-check`, "-emit-ssa`, `-emit-alt`, `-emit-asm`, `-src-target=<os>`, `-translate-c`, `-inc-path=<dir>`, `-show-cmd`, `-test`, `-release`, `-dynamic`, `-dll`, `-a` or `-alt`, `-b` or `-bootstrap`, `-c` or `-compile`, `-d:<NAME>=<value>`, `-o <file>`, `-l` or `-loud`, `-v` or `-version`, and `-h` or `-help`. The option `-I:<headers>` is accepted only by the alternative backend.
 
-The `--release` option selects release code generation, which omits ordinary pre- and postcondition checks and runtime invariant checks, but retains guarded contracts and assertions. The `--test` option selects the test runner described in Section 4.8. The `--dynamic` option requests dynamic linking instead of static linking where the platform supports it.
+The `-release` option selects release code generation, which omits ordinary pre- and postcondition checks and runtime invariant checks, but retains guarded contracts and assertions. The `-test` option selects the test runner described in Section 4.8. The `-dynamic` option requests dynamic linking instead of static linking where the platform supports it.
 
 ### 9.4 Project manifest
 
@@ -751,7 +751,7 @@ bulk-entry     = IDENT [ ":" [ "mut" ] type ] "=" expr ;
 (* Functions *)
 fn-decl        = "fn" [ "(" IDENT ")" ] IDENT [ type-params ]
                  "(" [ param { "," param } [ "," ] ] ")" type
-                 [ "=" [ "trust" ] block ] ;
+                 [ "=" { "inline" | "trust" } block ] ;
 type-params    = "[" [ tparam { "," tparam } [ "," ] ] "]" ;
 tparam         = IDENT [ ":" type ] ;
 param          = IDENT ":" [ "mut" ] type ;

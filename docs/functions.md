@@ -26,6 +26,27 @@ The reference implementation also retains the non-allocator `@args()` form for c
 
 ___
 
+# Inline functions
+
+The `inline` modifier asks the compiler to expand a function at its call sites.
+It may be combined with `trust` when the body also needs a trusted context:
+
+```spectre
+fn mix(a: i64, b: i64, c: i64) i64 = inline {
+    return (a * 31 + b * 17 - c * 13) ^ ((a + b) << 3)
+}
+
+fn peek(ptr: ref u8) u8 = inline trust {
+    return @load8(ptr) as u8
+}
+```
+
+The modifier is a performance hint; it never changes the observable behaviour of
+the program. Both the QBE backend and the C backend accept it, and calls to
+simple inline functions are expanded even in the QBE path.
+
+___
+
 # Extern functions
 
 External functions are declared with the `extern fn` construct:
