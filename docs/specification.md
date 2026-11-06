@@ -382,7 +382,7 @@ A postcondition states an obligation on the function at the point at which the c
 
 ### 7.4 Guarded contracts and release mode
 
-An ordinary pre- or postcondition is checked when the program is compiled in ordinary mode and is omitted when the program is compiled with `--release`. A guarded pre- or postcondition is checked in both modes. The choice is made at code generation time, not by a runtime flag. Contract failure always terminates the process; there is no recoverable exception or result value for a failed contract.
+An ordinary pre- or postcondition is checked when the program is compiled in ordinary mode and is omitted when the program is compiled with `-release`. A guarded pre- or postcondition is checked in both modes. The choice is made at code generation time, not by a runtime flag. Contract failure always terminates the process; there is no recoverable exception or result value for a failed contract.
 
 ### 7.5 Type invariants
 
